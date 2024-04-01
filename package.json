@@ -5,6 +5,7 @@
   "scripts": {
     "compose": "node src/scripts/run.mjs",
     "ceramic": "ceramic daemon --config daemon_config.json",
+    "graphiql": "node src/scripts/graphiql.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
