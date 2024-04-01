@@ -7,17 +7,6 @@ const AuthPrompt = () => {
   const [isVisible, setIsVisible] = useState(true);
   const clients = useCeramicContext();
   const { ceramic, composeClient } = clients;
-  const isLogged = () => {
-    return localStorage.getItem("logged_in") == "true";
-  };
-
-  const handleOpen = () => {
-    if (localStorage.getItem("logged_in")) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
-    }
-  };
 
   const handleKeyDid = () => {
     localStorage.setItem("ceramic:auth_type", "key");

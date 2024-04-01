@@ -29,7 +29,7 @@ const start = async () => {
   try {
     spinner.start('[App] Starting Dev environment\n')
     await bootstrap()
-    await graphiql()
+    //await graphiql()
   } catch (err) {
     spinner.fail(err)
     process.exit()

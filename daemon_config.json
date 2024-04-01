@@ -1,10 +1,14 @@
 {
-  "anchor": {},
+  "anchor": {
+    "anchor-service-url": "https://cas-clay.3boxlabs.com",
+    "auth-method": "did"
+  },
   "http-api": {
     "hostname": "127.0.0.1",
     "port": 7007,
+    "cors-allowed-origins": [".*"],
     "admin-dids": [
-      "did:key:z6MkuaZ5BvxX9StZcwxJK8AQrz6ZjhEb5uCxDdidVpEwKZcJ"
+      "did:key:z6MksHj5H9zs2nNE7knH2CeXe9wptf662FNJLpcgiKJTd1Y6"
     ]
   },
   "ipfs": {
@@ -19,17 +23,18 @@
     "metrics-exporter-enabled": false
   },
   "network": {
-    "name": "inmemory"
+    "name": "testnet-clay"
   },
   "node": {
-    "gateway": false
+    "gateway": false,
+    "private-seed-url": "inplace:ed25519#9fa970fa4a927bbc3ebbc1e5d42aa9177f2b029d86eb81033bf9d648f6f9a213"
   },
   "state-store": {
     "mode": "file",
     "local-directory": "/etc/ceramic/data"
   },
   "indexing": {
-    "db": "sqlite:///home/daniel/Documentos/Hackathons/DescentralizedIntelligenceSeason2/recomengine-ceramic/ceramic-indexing/ceramic.db",
+    "db": "sqlite:///home/daniel/Documentos/Hackathons/DescentralizedIntelligenceSeason2/ceramic-test-app/ceramic-indexing/ceramic.db",
     "allow-queries-before-historical-sync": true,
     "enable-historical-sync": false
   }

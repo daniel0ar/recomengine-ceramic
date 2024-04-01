@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import AuthPrompt from "./auth";
 
 
-type Profile = {
+type Movie = {
   id?: any;
   name?: string;
   username?: string;
@@ -17,48 +17,62 @@ type Profile = {
 export default function Home() {
   const clients = useCeramicContext();
   const { ceramic, composeClient } = clients;
-  const [profile, setProfile] = useState<Profile | undefined>();
+  const [movies, setMovies] = useState<Movie[] | undefined>([]);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(true);
 
-  const getProfile = async () => {
+  const getMovies = async () => {
     if (ceramic.did !== undefined) {
-      const profile = await composeClient.executeQuery(`
-        query {
-          viewer {
-            id
-            basicProfile {
+      const res = await composeClient.executeQuery(`
+      query ProfileIndex {
+        basicProfileIndex(first: 10) {
+          edges {
+            node {
               id
-              name
+              author{
+                id
+              }
               username
+              description
+              gender
+              emoji
             }
           }
         }
+      }
       `);
-      localStorage.setItem("viewer", profile?.data?.viewer?.id);
 
-      setProfile(profile?.data?.viewer?.basicProfile);
+      console.log(res?.data?.basicProfileIndex?.edges);
+    }
+    else {
+      console.log("ceramic did invalid")
     }
   };
-
+  
+  const isLogged = () => {
+    return localStorage.getItem("logged_in") == "true";
+  };
+  
+  const handleOpen = () => {
+    if (!isLogged()) {
+      setIsAuthModalOpen(true);
+    } else {
+      authenticateCeramic(ceramic, composeClient);
+      setIsAuthModalOpen(false);
+      getMovies();
+    }
+  };
+  
   useEffect(() => {
-    if (localStorage.getItem("logged_in")) {
-      handleLogin();
-      getProfile();
-    }
-  }, []);
-  
-  const handleLogin = async () => {
-    await authenticateCeramic(ceramic, composeClient);
-    await getProfile();
-  };
-  
+    handleOpen()
+  }, [isAuthModalOpen]);
+
   return (
     <div>
-      <AuthPrompt />
+      {isAuthModalOpen && <AuthPrompt />}
       <div className='container'>
         <CeramicWrapper>
           <div className='body'>
-            {profile?.name}
-            {profile?.id}
+            {movies?.map((movie, index) => <h2 key={index}>{movie?.title}</h2>)}
           </div>
         </CeramicWrapper>
       </div>
