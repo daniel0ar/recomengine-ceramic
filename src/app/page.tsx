@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import AuthPrompt from "./auth";
 
 
-type Movie = {
+type Profile = {
   id?: any;
   name?: string;
   username?: string;
@@ -17,7 +17,7 @@ type Movie = {
 export default function Home() {
   const clients = useCeramicContext();
   const { ceramic, composeClient } = clients;
-  const [profiles, setProfiles] = useState<Movie[] | undefined>([]);
+  const [profiles, setProfiles] = useState<Profile[] | undefined>([]);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(true);
 
   const getProfiles = async () => {
@@ -72,7 +72,7 @@ export default function Home() {
       <div className='container'>
         <CeramicWrapper>
           <div className='body'>
-            {profiles?.map((movie, index) => <h2 key={index}>{movie?.title}</h2>)}
+            {profiles?.map((p, index) => <h2 key={index}>{p?.name}</h2>)}
           </div>
         </CeramicWrapper>
       </div>
