@@ -1,8 +1,5 @@
 {
-  "anchor": {
-    "anchor-service-url": "https://cas-clay.3boxlabs.com",
-    "auth-method": "did"
-  },
+  "anchor": {},
   "http-api": {
     "hostname": "127.0.0.1",
     "port": 7007,
@@ -23,18 +20,17 @@
     "metrics-exporter-enabled": false
   },
   "network": {
-    "name": "testnet-clay"
+    "name": "inmemory"
   },
   "node": {
-    "gateway": false,
-    "private-seed-url": "inplace:ed25519#9fa970fa4a927bbc3ebbc1e5d42aa9177f2b029d86eb81033bf9d648f6f9a213"
+    "gateway": false
   },
   "state-store": {
     "mode": "file",
     "local-directory": "/etc/ceramic/data"
   },
   "indexing": {
-    "db": "sqlite:///home/daniel/Documentos/Hackathons/DescentralizedIntelligenceSeason2/recomengine-ceramic(clay)/ceramic-indexing/ceramic.db",
+    "db": "sqlite:///home/daniel/Documentos/Hackathons/DescentralizedIntelligenceSeason2/recomengine-ceramic/ceramic-indexing/ceramic.db",
     "allow-queries-before-historical-sync": true,
     "enable-historical-sync": false
   }
