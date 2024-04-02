@@ -1,0 +1,4 @@
+type User @createModel(accountRelation: LIST, description: "A basic user") {
+  username: String! @string(maxLength: 255)
+  name: String! @string(maxLength: 255)
+}

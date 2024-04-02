@@ -1,0 +1,15 @@
+type Movie @loadModel(id: "$MOVIE_ID") {
+    id: ID!
+}
+
+type User @loadModel(id: "$USER_ID") {
+    id: ID!
+}
+
+type Rating @createModel(accountRelation: LIST, description: "A movie rating by a user") {
+  rating: Int!
+  movieId: StreamID! @documentReference(model: "Movie")
+  movie: Movie! @relationDocument(property: "movieId")
+  userId: StreamID! @documentReference(model: "User")
+  user: User! @relationDocument(property: "userId")
+}

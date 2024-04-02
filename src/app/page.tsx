@@ -6,42 +6,32 @@ import AuthPrompt from "./auth";
 
 
 type Movie = {
-  id?: any;
-  name?: string;
-  username?: string;
-  description?: string;
-  gender?: string;
-  emoji?: string;
+  title: string,
+  overview?: string
+  release_date?: string
 };
 
 export default function Home() {
   const clients = useCeramicContext();
   const { ceramic, composeClient } = clients;
-  const [profiles, setProfiles] = useState<Movie[] | undefined>([]);
+  const [profiles, setMovies] = useState<Movie[] | undefined>([]);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(true);
 
-  const getProfiles = async () => {
+  const getMovies = async () => {
     if (ceramic.did !== undefined) {
       const res = await composeClient.executeQuery(`
-      query {
-        basicProfileIndex(first: 10) {
-          edges {
+      query Movies{
+        movieIndex(last:10){
+          edges{
             node {
-              id
-              author{
-                id
-              }
-              username
-              description
-              gender
-              emoji
+              title
             }
           }
         }
       }
       `);
 
-      console.log(res?.data?.basicProfileIndex?.edges);
+      console.log(res?.data?.movieIndex?.edges);
     }
     else {
       console.log("ceramic did invalid")
@@ -58,7 +48,7 @@ export default function Home() {
     } else {
       authenticateCeramic(ceramic, composeClient);
       setIsAuthModalOpen(false);
-      getProfiles();
+      getMovies();
     }
   };
   

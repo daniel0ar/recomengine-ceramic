@@ -1,0 +1,5 @@
+type Movie @createModel(accountRelation: LIST, description: "A basic movie") {
+  title: String! @string(minLength: 3, maxLength: 255)
+  overview: String @string(maxLength: 100)
+  release_date: String @string(maxLength: 100)
+}

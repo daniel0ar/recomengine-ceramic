@@ -20,13 +20,29 @@ const ceramic = new CeramicClient("http://localhost:7007");
  */
 export const writeComposite = async (spinner) => {
   await authenticate();
-  const profileComposite = await createComposite(
+  const moviesComposite = await createComposite(
     ceramic,
-    "src/composites/00-basicProfile.graphql"
+    "src/composites/00-movie.graphql"
   );
 
+  const usersComposite = await createComposite(
+    ceramic,
+    "src/composites/01-user.graphql"
+  );
+
+  const ratingsSchema = readFileSync("src/composites/02-rating.graphql", {
+    encoding: "utf-8",
+  }).replace("$MOVIE_ID", moviesComposite.modelIDs[0])
+    .replace("$USER_ID", usersComposite.modelIDs[0]);
+
+  const ratingsComposite = await Composite.create({
+    ceramic,
+    schema: ratingsSchema,
+  });
+
   const composite = Composite.from([
-    profileComposite,
+    moviesComposite,
+    ratingsComposite
   ]);
 
   await writeEncodedComposite(composite, "src/__generated__/definition.json");

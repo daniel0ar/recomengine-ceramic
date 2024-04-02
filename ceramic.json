@@ -8,7 +8,7 @@
     "port": 7007,
     "cors_allowed_origins": [],
     "admin_dids": [
-      "did:key:z6MkuaZ5BvxX9StZcwxJK8AQrz6ZjhEb5uCxDdidVpEwKZcJ"
+      "did:key:z6MksHj5H9zs2nNE7knH2CeXe9wptf662FNJLpcgiKJTd1Y6"
     ]
   },
   "network": {
