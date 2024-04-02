@@ -17,13 +17,13 @@ type Movie = {
 export default function Home() {
   const clients = useCeramicContext();
   const { ceramic, composeClient } = clients;
-  const [movies, setMovies] = useState<Movie[] | undefined>([]);
+  const [profiles, setProfiles] = useState<Movie[] | undefined>([]);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(true);
 
-  const getMovies = async () => {
+  const getProfiles = async () => {
     if (ceramic.did !== undefined) {
       const res = await composeClient.executeQuery(`
-      query ProfileIndex {
+      query {
         basicProfileIndex(first: 10) {
           edges {
             node {
@@ -58,7 +58,7 @@ export default function Home() {
     } else {
       authenticateCeramic(ceramic, composeClient);
       setIsAuthModalOpen(false);
-      getMovies();
+      getProfiles();
     }
   };
   
@@ -72,7 +72,7 @@ export default function Home() {
       <div className='container'>
         <CeramicWrapper>
           <div className='body'>
-            {movies?.map((movie, index) => <h2 key={index}>{movie?.title}</h2>)}
+            {profiles?.map((movie, index) => <h2 key={index}>{movie?.title}</h2>)}
           </div>
         </CeramicWrapper>
       </div>

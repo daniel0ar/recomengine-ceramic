@@ -12,12 +12,17 @@
     ]
   },
   "network": {
-    "id": "InMemory",
+    "id": "Clay",
     "pubsub_topic": null
   },
-  "anchor": "None",
+  "anchor": {
+    "RemoteDid": {
+      "url": "https://cas-clay.3boxlabs.com",
+      "private_seed_url": "inplace:ed25519#ee4312ae022d12c3a13646f31bc089b9478cc22b2a21e26b3aa6e58306b5be66"
+    }
+  },
   "indexing": {
-    "db": "sqlite:///home/daniel/Documentos/Hackathons/DescentralizedIntelligenceSeason2/recomengine-ceramic/ceramic-indexing/ceramic.db",
+    "db": "sqlite:///home/daniel/Documentos/Hackathons/DescentralizedIntelligenceSeason2/recomengine-ceramic(clay)/ceramic-indexing/ceramic.db",
     "allow_queries_before_historical_sync": true,
     "enable_historical_sync": false
   },

@@ -34,7 +34,7 @@
     "local-directory": "/etc/ceramic/data"
   },
   "indexing": {
-    "db": "sqlite:///home/daniel/Documentos/Hackathons/DescentralizedIntelligenceSeason2/ceramic-test-app/ceramic-indexing/ceramic.db",
+    "db": "sqlite:///home/daniel/Documentos/Hackathons/DescentralizedIntelligenceSeason2/recomengine-ceramic(clay)/ceramic-indexing/ceramic.db",
     "allow-queries-before-historical-sync": true,
     "enable-historical-sync": false
   }

@@ -22,7 +22,7 @@ export const writeComposite = async (spinner) => {
   await authenticate();
   const profileComposite = await createComposite(
     ceramic,
-    "src/composites/00-bascProfile.graphql"
+    "src/composites/00-basicProfile.graphql"
   );
 
   const composite = Composite.from([
