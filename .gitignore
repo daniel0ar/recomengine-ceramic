@@ -36,7 +36,8 @@ yarn-error.log*
 next-env.d.ts
 
 # Ceramic generated composites
-./src/__generated__
+src/__generated__
 
-# Ceramic logs
+# Ceramic logs and indexing
+.ceramic
 log

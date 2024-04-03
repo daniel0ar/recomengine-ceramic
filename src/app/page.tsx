@@ -1,23 +1,22 @@
-"use client"
+"use client";
 import { useCeramicContext, CeramicWrapper } from "@/context";
 import { authenticateCeramic } from "@/utils/auth";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import AuthPrompt from "./auth";
 
-
 type Movie = {
-  title: string,
-  overview?: string
-  release_date?: string
+  title: string;
+  overview?: string;
+  release_date?: string;
 };
 
 export default function Home() {
   const clients = useCeramicContext();
   const { ceramic, composeClient } = clients;
-  const [profiles, setMovies] = useState<Movie[] | undefined>([]);
+  const [movies, setMovies] = useState<Movie[] | undefined>([]);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(true);
 
-  const getMovies = async () => {
+  const getMovies = useCallback(async () => {
     if (ceramic.did !== undefined) {
       const res = await composeClient.executeQuery(`
       query Movies{
@@ -32,17 +31,16 @@ export default function Home() {
       `);
 
       console.log(res?.data?.movieIndex?.edges);
+    } else {
+      console.log("ceramic did invalid");
     }
-    else {
-      console.log("ceramic did invalid")
-    }
-  };
-  
+  }, [ceramic.did, composeClient]);
+
   const isLogged = () => {
     return localStorage.getItem("logged_in") == "true";
   };
-  
-  const handleOpen = () => {
+
+  const handleOpen = useCallback(() => {
     if (!isLogged()) {
       setIsAuthModalOpen(true);
     } else {
@@ -50,19 +48,21 @@ export default function Home() {
       setIsAuthModalOpen(false);
       getMovies();
     }
-  };
-  
+  }, [ceramic, composeClient, getMovies]);
+
   useEffect(() => {
-    handleOpen()
-  }, [isAuthModalOpen]);
+    handleOpen();
+  }, [handleOpen]);
 
   return (
     <div>
       {isAuthModalOpen && <AuthPrompt />}
-      <div className='container'>
+      <div className="container">
         <CeramicWrapper>
-          <div className='body'>
-            {profiles?.map((movie, index) => <h2 key={index}>{movie?.title}</h2>)}
+          <div className="body">
+            {movies?.map((movie, index) => (
+              <h2 key={index}>{movie?.title}</h2>
+            ))}
           </div>
         </CeramicWrapper>
       </div>

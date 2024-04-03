@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "generate": "node src/scripts/credentials.mjs",
     "compose": "node src/scripts/run.mjs",
-    "ceramic": "ceramic daemon --config daemon_config.json",
+    "ceramic": "ceramic daemon --config ./composedb.config.json",
     "graphiql": "node src/scripts/graphiql.mjs",
     "dev": "next dev",
     "build": "next build",
