@@ -1,8 +1,9 @@
-import { data } from "./data";
+import { movies } from "@/data/movies";
+import { ComposeClient } from "@composedb/client";
 
-const createMovies = () => {
+const createMovies = (composeClient: ComposeClient) => {
   console.log("CREATING")
-  data?.map(async (m) => {
+  movies?.map(async (m) => {
     const res = await composeClient.executeQuery(`
     mutation createMovie {
       createMovie(input: {
