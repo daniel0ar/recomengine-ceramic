@@ -1,5 +1,6 @@
 import { useCeramicContext } from "@/context";
 import { AuthContext } from "@/context/auth";
+import { fillDatabaste } from "@/utils/db";
 import { useCallback, useContext, useEffect, useState } from "react";
 
 type Props = {}
@@ -50,9 +51,12 @@ export const Movies = (props: Props) => {
 
   useEffect(() => {
     if(isLoggedIn){
-      setTimeout(() => getMovies(), 1000) // Wait for auth
+      setTimeout(() => {
+        getMovies();
+        fillDatabaste(composeClient); // Call if first time start
+      }, 1000) // Wait for auth
     }
-  }, [getMovies, isLoggedIn]);
+  }, [composeClient, getMovies, isLoggedIn]);
 
   return (
     <div>
