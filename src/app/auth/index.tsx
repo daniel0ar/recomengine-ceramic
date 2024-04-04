@@ -1,24 +1,38 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { authenticateCeramic } from "@/utils/auth";
 import { useCeramicContext } from "@/context";
+import { AuthContext } from "@/context/auth";
 
 const AuthPrompt = () => {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
   const clients = useCeramicContext();
+  const { login } = useContext(AuthContext);
   const { ceramic, composeClient } = clients;
 
   const handleKeyDid = () => {
     localStorage.setItem("ceramic:auth_type", "key");
     authenticateCeramic(ceramic, composeClient);
+    login({id: "1", name: "User"})
     setIsVisible(false);
   };
 
   const handleEthPkh = () => {
     localStorage.setItem("ceramic:auth_type", "eth");
     authenticateCeramic(ceramic, composeClient);
+    login({id: "1", name: "User"})
     setIsVisible(false);
   };
+
+  useEffect(() => {
+    if(localStorage.getItem("logged_in") == "true"){
+      authenticateCeramic(ceramic, composeClient);
+      login({id: "1", name: "User"})
+    }
+    else {
+      setIsVisible(true);
+    }
+  },[])
 
   return (
     <div>
