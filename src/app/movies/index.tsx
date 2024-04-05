@@ -1,7 +1,5 @@
 import { useCeramicContext } from "@/context";
 import { AuthContext } from "@/context/auth";
-import { fillDatabaste } from "@/utils/db";
-import { getRecommendedItems } from "@/utils/recommend";
 import { MutableRefObject, useCallback, useContext, useEffect, useRef, useState } from "react";
 
 type Props = {}
@@ -54,13 +52,10 @@ export const Movies = (props: Props) => {
   useEffect(() => {
     if(isLoggedIn){
       setTimeout(() => {
-        fillDatabaste(composeClient).then((res) => {
-          console.log("Filled database");
-        }).catch(e => console.log("Error: ", e))
         getMovies();
       }, 1000) // Wait for auth
     }
-  }, [composeClient, getMovies, isLoggedIn]);
+  }, [getMovies, isLoggedIn]);
 
   return (
     <div>

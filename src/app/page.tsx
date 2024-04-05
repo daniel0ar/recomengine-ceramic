@@ -2,9 +2,9 @@
 import { CeramicWrapper } from "@/context";
 import AuthPrompt from "./auth";
 import { AuthProvider } from "@/context/auth";
-import { Movies } from "./movies";
+import Home from "./pages/home";
 
-export default function Home() {
+export default function App() {
 
   return (
     <AuthProvider>
@@ -12,7 +12,7 @@ export default function Home() {
         <div className="container">
           <CeramicWrapper>
               <div>
-                <Movies></Movies>
+                <Home></Home>
               </div>
           </CeramicWrapper>
         </div> 
