@@ -1,7 +1,8 @@
 import { useCeramicContext } from "@/context";
 import { AuthContext } from "@/context/auth";
 import { fillDatabaste } from "@/utils/db";
-import { useCallback, useContext, useEffect, useState } from "react";
+import { getRecommendedItems } from "@/utils/recommend";
+import { MutableRefObject, useCallback, useContext, useEffect, useRef, useState } from "react";
 
 type Props = {}
 
@@ -15,7 +16,8 @@ export const Movies = (props: Props) => {
   const clients = useCeramicContext();
   const { ceramic, composeClient } = clients;
   const [movies, setMovies] = useState<Movie[] | undefined>([]);
-  const { isLoggedIn } = useContext(AuthContext)
+  const { isLoggedIn } = useContext(AuthContext);
+  let recommendations: MutableRefObject<any[]> = useRef([]);
 
   const getMovies = useCallback(async () => {
     if (ceramic.did !== undefined) {
@@ -50,19 +52,34 @@ export const Movies = (props: Props) => {
   },[ceramic.did, composeClient]);
 
   useEffect(() => {
+    const recommend = async () => {
+      fillDatabaste(composeClient).then((res) => {
+        console.log("Ratings before recommend is:")
+        console.log(res)
+        recommendations.current = getRecommendedItems(res, 5);
+      }).catch(e => console.log("Error: ", e))
+    };
+
     if(isLoggedIn){
       setTimeout(() => {
         getMovies();
-        fillDatabaste(composeClient); // Call if first time start
+        recommend();
       }, 1000) // Wait for auth
     }
   }, [composeClient, getMovies, isLoggedIn]);
 
   return (
     <div>
-      {movies?.map((movie, index) => (
-        <h2 key={index}>{movie?.title}</h2>
-      ))}
+      <div>
+        <h2>Recommended</h2>
+        { recommendations.current?.map((r, index) => <p key={index}>Recommend: {r}</p>) }
+      </div>
+      <div>
+        <h2>All movies</h2>
+        {movies?.map((movie, index) => (
+          <p key={index}>{movie?.title}</p>
+        ))}
+      </div>
     </div>
   )
 }
