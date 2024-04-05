@@ -52,18 +52,12 @@ export const Movies = (props: Props) => {
   },[ceramic.did, composeClient]);
 
   useEffect(() => {
-    const recommend = async () => {
-      fillDatabaste(composeClient).then((res) => {
-        console.log("Ratings before recommend is:")
-        console.log(res)
-        recommendations.current = getRecommendedItems(res, 5);
-      }).catch(e => console.log("Error: ", e))
-    };
-
     if(isLoggedIn){
       setTimeout(() => {
+        fillDatabaste(composeClient).then((res) => {
+          console.log("Filled database");
+        }).catch(e => console.log("Error: ", e))
         getMovies();
-        recommend();
       }, 1000) // Wait for auth
     }
   }, [composeClient, getMovies, isLoggedIn]);
