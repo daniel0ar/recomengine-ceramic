@@ -2,6 +2,7 @@ import { useCeramicContext } from '@/context';
 import { AuthContext } from '@/context/auth';
 import { fillDatabaste } from '@/utils/db';
 import React, { useContext, useEffect } from 'react'
+import { Movies } from '../movies';
 
 const Home = () => {
   const { composeClient } = useCeramicContext();
@@ -10,9 +11,9 @@ const Home = () => {
   useEffect(() => {
     if(isLoggedIn){
       setTimeout(() => {
-        fillDatabaste(composeClient).then((res) => {
-          console.log("Filled database");
-        }).catch(e => console.log("Error: ", e))
+        // fillDatabaste(composeClient).then((res) => {
+        //   console.log("Filled database");
+        // }).catch(e => console.log("Error: ", e))
       }, 1000) // Wait for auth
     }
   }, [composeClient, isLoggedIn]);
@@ -48,6 +49,7 @@ const Home = () => {
           </a>
         </div>
       </div>
+      <Movies></Movies>
     </div>
   )
 }
