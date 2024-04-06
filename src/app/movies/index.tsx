@@ -29,10 +29,9 @@ export const Movies = () => {
   const [ratings, setRatings] = useState<Record<string, any> | undefined>();
   const [users, setUsers] = useState<User[] | undefined>();
   const { isLoggedIn } = useContext(AuthContext);
-  let recommendations: MutableRefObject<any[]> = useRef([]);
+  const recommendations: MutableRefObject<any[]> = useRef([]);
 
   const getMovies = useCallback(async () => {
-    if (ceramic.did !== undefined) {
       const res = await composeClient.executeQuery(`
       query Movies{
         movieIndex(last:10){
@@ -62,13 +61,9 @@ export const Movies = () => {
         }
       })
       setMovies(fetchedMovies);
-    } else {
-      console.log("ceramic did invalid");
-    }
-  },[ceramic.did, composeClient]);
+  },[composeClient]);
 
   const getUsers = useCallback(async () => {
-    if (ceramic.did !== undefined) {
       const res = await composeClient.executeQuery(`
       query Users{
         userIndex(last:10){
@@ -96,10 +91,7 @@ export const Movies = () => {
         }
       })
       setUsers(fetchedUsers);
-    } else {
-      console.log("ceramic did invalid");
-    }
-  }, [ceramic.did, composeClient]);
+  }, [composeClient]);
 
   const fillRatingMatrix = (ratingArr: Record<string, any>, value: number, userId: string, movieId: string) => {
     if (ratingArr[userId] !== undefined) {
@@ -111,7 +103,6 @@ export const Movies = () => {
 }
 
   const getRatings = useCallback(async () => {
-    if (ceramic.did !== undefined) {
       const res = await composeClient.executeQuery(`
       query Ratings{
         ratingIndex(last:100){
@@ -144,24 +135,22 @@ export const Movies = () => {
       console.log("Ratings are:")
       console.log(ratingsArr);
       setRatings(ratingsArr);
-    } else {
-      console.log("ceramic did invalid");
-    }
-  }, [ceramic.did, composeClient]);
+  }, [composeClient]);
 
   useEffect(() => {
-    if(isLoggedIn){
+    if(isLoggedIn && ceramic.did){
       setTimeout(() => {
         getMovies();
         getUsers();
         getRatings();
       }, 1000) // Wait for auth
     }
-  }, [getMovies, getUsers, getRatings, isLoggedIn]);
+  }, [getMovies, getUsers, getRatings, isLoggedIn, ceramic.did]);
 
   useEffect(() => {
     if (ratings && users && movies) {
-      recommendations.current = getRecommendedItems(ratings, users[0].id, users, movies)
+      recommendations.current = getRecommendedItems(ratings, users[0].id, users, movies) // TODO: refactor this somewhere else
+      console.log("Recommendations are: ", recommendations.current)
     }
   }, [ratings, users, movies])
 

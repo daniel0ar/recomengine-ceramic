@@ -13,13 +13,11 @@ export const createMatrix = (ratings: Record<string,any>, users: any[], items: a
 }
 
 export const getIndexOfUser = (users: any[], userCeramicId: string) => {
-  let i = 0;
-  users.forEach(user => {
-    if(user.id === userCeramicId){
-      return i; // TODO: Break loop and then return, otherwise it is always returning -1
+  for (let i = 0; i < users.length; i++) {
+    if(users[i].id === userCeramicId){
+      return i;
     }
-    i++;
-  });
+  }
   return -1;
 } 
 
