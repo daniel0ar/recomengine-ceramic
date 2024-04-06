@@ -1,6 +1,6 @@
 "use client";
 import { CeramicWrapper } from "@/context";
-import AuthPrompt from "./auth";
+import AuthPrompt from "./components/auth";
 import { AuthProvider } from "@/context/auth";
 import Home from "./pages/home";
 

@@ -2,7 +2,6 @@ import { useCeramicContext } from '@/context';
 import { AuthContext } from '@/context/auth';
 import { fillDatabaste } from '@/utils/db';
 import React, { useContext, useEffect } from 'react'
-import { Movies } from '../movies';
 import { useRouter } from 'next/navigation';
 
 const Home = () => {
@@ -54,7 +53,6 @@ const Home = () => {
           </button>
         </div>
       </div>
-      <Movies></Movies>
     </div>
   )
 }
