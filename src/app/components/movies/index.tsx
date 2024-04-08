@@ -192,8 +192,10 @@ export const Movies = () => {
             <a href="#">
               <Image
                 className="rounded-t-lg"
-                src="movie-generic.png"
+                src="/movie-generic.png"
                 alt=""
+                width={32}
+                height={32}
               />
             </a>
             <div className="p-5">

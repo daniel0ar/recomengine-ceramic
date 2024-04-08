@@ -3,6 +3,7 @@ import { AuthContext } from '@/context/auth';
 import { fillDatabaste } from '@/utils/db';
 import React, { useContext, useEffect } from 'react'
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const Home = () => {
   const { composeClient } = useCeramicContext();
@@ -42,15 +43,11 @@ const Home = () => {
            all without sending your data to centralized backends and hoping it does not get sold.
         </p>
         <div className="mt-10 flex items-center justify-center gap-x-6">
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              router.push(`/process/`);
-            }}
+          <Link
             className="rounded-full bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
+            href={'process'}          >
             Get Started
-          </button>
+          </Link>
         </div>
       </div>
     </div>

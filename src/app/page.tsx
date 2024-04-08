@@ -3,6 +3,7 @@ import { CeramicWrapper } from "@/context";
 import AuthPrompt from "./components/auth";
 import { AuthProvider } from "@/context/auth";
 import Home from "./pages/home";
+import Process from "./process/page";
 
 export default function App() {
 
@@ -12,7 +13,7 @@ export default function App() {
         <div className="container">
           <CeramicWrapper>
               <div>
-                <Home></Home>
+                <Process></Process>
               </div>
           </CeramicWrapper>
         </div> 
