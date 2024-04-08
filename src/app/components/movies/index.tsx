@@ -10,25 +10,7 @@ import {
   useState,
 } from "react";
 import { MovieCard } from "./Movie";
-
-export type Movie = {
-  id: string;
-  title: string;
-  overview?: string;
-  release_date?: string;
-};
-
-type User = {
-  id: string;
-  name: string;
-  username: string;
-};
-
-type Rating = {
-  userId: string;
-  movieId: string;
-  rating: number;
-};
+import { Movie, User, Rating } from "@/app/types";
 
 export const Movies = () => {
   const clients = useCeramicContext();
