@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
+# Ceramic Recommendation Engine
+A recommendation engine with collaborative filtering to give suggestions for items stored in the Ceramic Protocol. The scope this project worked in is for movies.
+The project uses a local Inmemory node database and creates dummy data for movies, users and ratings, allowing a new user to receive suggestions based on the feedback for at least three movies.
 ## Getting Started
 
-First, run the development server:
+Download and install the Ceramic and Compose DB CLIs following: [https://developers.ceramic.network/docs/composedb/set-up-your-environment#2c-installation-using-javascript-package-managers](Installation Guide method 2c)
+
+
+Then go into the project folder and run:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install --include dev
+```
+
+Generate types for the collaborative-filter library with:
+``` dts-gen collaborative-filter ``` (if you have not previously installed dts-gen install it with ```npm install -g dts-gen```)
+
+Copy and paste it into the ```node_modules/collaborative/filter/``` folder
+Then run:
+```bash
+npm run compose
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+To learn more about the tech used, take a look at the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Ceramic](https://developers.ceramic.network/docs/composedb/getting-started) - learn about ComposeDB and the Ceramic Network
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## License
+MIT
