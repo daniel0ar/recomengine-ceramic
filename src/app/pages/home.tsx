@@ -3,7 +3,6 @@ import { AuthContext } from '@/context/auth';
 import { fillDatabaste } from '@/utils/db';
 import React, { useContext, useEffect } from 'react'
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 
 const Home = () => {
   const { composeClient } = useCeramicContext();
@@ -21,7 +20,7 @@ const Home = () => {
   }, [composeClient, isLoggedIn]);
 
   return (
-    <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+    <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-36">
       <div className="hidden sm:mb-8 sm:flex sm:justify-center">
         <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20 dark:ring-gray-300 dark:hover:ring-gray-200 dark:text-gray-100">
           Part of the Descentralized Inteligence S2 Hackathon.{" "}
@@ -42,13 +41,6 @@ const Home = () => {
           Tell us what you like and get recommended items based on your taste in movies, books or any item,
            all without sending your data to centralized backends and hoping it does not get sold.
         </p>
-        <div className="mt-10 flex items-center justify-center gap-x-6">
-          <Link
-            className="rounded-full bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            href={'process'}          >
-            Get Started
-          </Link>
-        </div>
       </div>
     </div>
   )

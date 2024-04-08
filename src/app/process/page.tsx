@@ -1,21 +1,22 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { RateMovies } from "./RateMovies";
 import { ShowRecomm } from "./ShowRecomm";
 import { Overview } from "./Overview";
+import Home from "../pages/home";
 
 const Process = () => {
   const [step, setStep] = useState(0);
-  const router = useRouter();
 
   const getComponent = () => {
     switch (step) {
       case 0:
+        return <Home></Home>;
+      case 1:
         return <Overview></Overview>;
-      case 1:
+      case 2:
         return <RateMovies></RateMovies>;
-      case 1:
+      case 3:
         return <ShowRecomm></ShowRecomm>;
       default:
         return <></>;
@@ -59,7 +60,7 @@ const Process = () => {
                 className="bg-indigo-500 py-3 mt-5 px-5 text-white text-base font-medium rounded-md hover:bg-indigo-300"
                 onClick={handleNext}
               >
-                Start
+                Get Started
               </button>
             )}
           </footer>
