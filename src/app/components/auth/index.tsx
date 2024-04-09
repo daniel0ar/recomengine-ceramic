@@ -13,7 +13,7 @@ const AuthPrompt = () => {
   const handleKeyDid = () => {
     localStorage.setItem("ceramic:auth_type", "key");
     authenticateCeramic(ceramic, composeClient);
-    login({ id: "1", name: "User" });
+    login({ id: "kjzl6kcym7w8yas8smqz7ndk83ws3kwdediogf0c2n7j954wyf2t1ijglkbmi5s", name: "User" });
     setIsVisible(false);
   };
 
@@ -27,7 +27,7 @@ const AuthPrompt = () => {
   useEffect(() => {
     if (localStorage.getItem("logged_in") == "true") {
       authenticateCeramic(ceramic, composeClient);
-      login({ id: "1", name: "User" });
+      login({ id: "kjzl6kcym7w8yas8smqz7ndk83ws3kwdediogf0c2n7j954wyf2t1ijglkbmi5s", name: "User" });
     } else {
       setIsVisible(true);
     }

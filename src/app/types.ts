@@ -3,6 +3,7 @@ export type Movie = {
     title: string;
     overview?: string;
     release_date?: string;
+    liked?: boolean;
   };
   
 export type User = {

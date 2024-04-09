@@ -10,12 +10,12 @@ type Props = {
 export const MovieCard = ({index, movie}: Props) => {
     const [ isLiked, setIsLiked ] = useState(false);
     const handleLike = () => {
-        
-    }
+        setIsLiked(true);
+    };
 
     const handleRemoveLike = () => {
-
-    }
+        setIsLiked(false);
+    };
 
   return (
     <div
@@ -26,8 +26,8 @@ export const MovieCard = ({index, movie}: Props) => {
         className="rounded-t-lg"
         src="/movie-generic.png"
         alt=""
-        width={32}
-        height={32}
+        width={60}
+        height={30}
       />
       <button
         className="!absolute top-4 right-4 h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase text-red-500 transition-all hover:bg-red-500/10 active:bg-red-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"

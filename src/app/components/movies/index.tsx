@@ -18,7 +18,7 @@ export const Movies = () => {
   const [movies, setMovies] = useState<Movie[] | undefined>();
   const [ratings, setRatings] = useState<Record<string, any> | undefined>();
   const [users, setUsers] = useState<User[] | undefined>();
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, user } = useContext(AuthContext);
   const recommendations: MutableRefObject<any[]> = useRef([]);
 
   const getMovies = useCallback(async () => {
@@ -47,6 +47,7 @@ export const Movies = () => {
           title: movie.node.title,
           overview: movie.node.overview,
           release_date: movie.node.release_date,
+          liked: ratings?.[user?.id!]?.[movie.node.id] === 1 // TODO: Fix not working (maybe bc ratings state is empty [])
         });
       }
     });
@@ -140,12 +141,12 @@ export const Movies = () => {
   useEffect(() => {
     if (isLoggedIn && ceramic.did) {
       setTimeout(() => {
-        getMovies();
         getUsers();
         getRatings();
+        getMovies();
       }, 1000); // Wait for auth
     }
-  }, [getMovies, getUsers, getRatings, isLoggedIn, ceramic.did]);
+  }, [getMovies, getUsers, getRatings, isLoggedIn, ceramic.did,]);
 
   useEffect(() => {
     if (ratings && users && movies) {
